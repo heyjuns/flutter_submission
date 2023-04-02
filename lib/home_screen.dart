@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_submission/models/todo_list.dart';
 
 class HomeScreen extends StatelessWidget {
   final String username;
@@ -15,13 +16,14 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color(0xFF7E57C2),
         onPressed: () {
           _showSnackBar('TODO: add todo item');
         },
         child: const Icon(Icons.add),
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
+        child: Container(
           padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,13 +35,15 @@ class HomeScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Hi $username',
+                        username != '' ? 'Hi $username' : 'Hi User',
+                        style: const TextStyle(
+                            color: Color(0xFF7E57C2),
+                            fontSize: 32.0,
+                            fontWeight: FontWeight.bold),
                       ),
-                      const Text('10 Task Pending'),
+                      Text(
+                          '${todoList.where((todo) => todo.checked == false).length} Task Pending'),
                     ],
-                  ),
-                  const CircleAvatar(
-                    child: Icon(Icons.person_sharp),
                   ),
                 ],
               ),
@@ -69,10 +73,49 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
               const TitleSection(title: 'Today Task', fontSize: 16.0),
+              const TodoList(),
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class TodoList extends StatefulWidget {
+  const TodoList({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<TodoList> createState() => _TodoListState();
+}
+
+class _TodoListState extends State<TodoList> {
+  @override
+  Widget build(BuildContext context) {
+    return StatefulBuilder(
+      builder: (context, setState) {
+        return Expanded(
+          flex: 1,
+          child: ListView(
+            children: todoList.map((todo) {
+              return Card(
+                elevation: 1,
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                child: CheckboxListTile(
+                    controlAffinity: ListTileControlAffinity.leading,
+                    title: Text(todo.task),
+                    value: todo.checked,
+                    activeColor: const Color(0xFF7E57C2),
+                    onChanged: (bool? value) {
+                      setState(() => todo.checked = value!);
+                    }),
+              );
+            }).toList(),
+          ),
+        );
+      },
     );
   }
 }

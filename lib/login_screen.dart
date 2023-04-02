@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_submission/home_screen.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -93,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: () =>
                             _showSnackBar('TODO: Login With Facebook'),
                         icon: const Icon(
-                          Icons.facebook,
+                          FontAwesomeIcons.facebook,
                           color: Color(0xFF4267B2),
                         ),
                       ),
@@ -102,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: () =>
                             _showSnackBar('TODO: Login With Whatsapp'),
                         icon: const Icon(
-                          Icons.whatsapp,
+                          FontAwesomeIcons.whatsapp,
                           color: Color(0xFF25D366),
                         ),
                       ),
@@ -111,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: () =>
                             _showSnackBar('TODO: Login With Telegram'),
                         icon: const Icon(
-                          Icons.telegram,
+                          FontAwesomeIcons.telegram,
                           color: Color(0xFF0088cc),
                         ),
                       ),
