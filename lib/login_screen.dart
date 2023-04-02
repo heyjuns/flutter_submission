@@ -122,14 +122,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   RichText(
                     textAlign: TextAlign.center,
-                    text: const TextSpan(
+                    text: TextSpan(
                       text: 'not a member? ',
-                      style: TextStyle(color: Colors.black, fontSize: 12),
+                      style: const TextStyle(color: Colors.black, fontSize: 12),
                       children: <TextSpan>[
                         TextSpan(
                           text: ' Sign up',
-                          style:
-                              TextStyle(color: Colors.blueAccent, fontSize: 12),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () => _showSnackBar('TODO: Sign up'),
+                          style: const TextStyle(
+                              color: Colors.blueAccent, fontSize: 12),
                         )
                       ],
                     ),
