@@ -7,7 +7,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _showSnackBar(String message) {
+    showSnackBar(String message) {
       return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(message),
         duration: const Duration(seconds: 1),
@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xFF7E57C2),
         onPressed: () {
-          _showSnackBar('TODO: add todo item');
+          showSnackBar('TODO: add todo item');
         },
         child: const Icon(Icons.add),
       ),
@@ -82,16 +82,11 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class TodoList extends StatefulWidget {
+class TodoList extends StatelessWidget {
   const TodoList({
     Key? key,
   }) : super(key: key);
 
-  @override
-  State<TodoList> createState() => _TodoListState();
-}
-
-class _TodoListState extends State<TodoList> {
   @override
   Widget build(BuildContext context) {
     return StatefulBuilder(
