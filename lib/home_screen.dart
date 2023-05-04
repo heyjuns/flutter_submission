@@ -82,35 +82,44 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class TodoList extends StatelessWidget {
+class TodoList extends StatefulWidget {
   const TodoList({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<TodoList> createState() => _TodoListState();
+}
+
+class _TodoListState extends State<TodoList> {
+  @override
   Widget build(BuildContext context) {
-    return StatefulBuilder(
-      builder: (context, setState) {
-        return Expanded(
-          flex: 1,
-          child: ListView(
-            children: todoList.map((todo) {
-              return Card(
-                elevation: 1,
-                margin: const EdgeInsets.symmetric(vertical: 8),
-                child: CheckboxListTile(
-                    controlAffinity: ListTileControlAffinity.leading,
-                    title: Text(todo.task),
-                    value: todo.checked,
-                    activeColor: const Color(0xFF7E57C2),
-                    onChanged: (bool? value) {
-                      setState(() => todo.checked = value!);
-                    }),
-              );
-            }).toList(),
-          ),
-        );
-      },
+    return Expanded(
+      flex: 1,
+      child: ListView(
+        children: todoList.map((todo) {
+          return Card(
+            elevation: 1,
+            margin: const EdgeInsets.symmetric(vertical: 8),
+            child: CheckboxListTile(
+                controlAffinity: ListTileControlAffinity.leading,
+                title: Text(
+                  todo.task,
+                  style: TextStyle(
+                    decoration:
+                        todo.checked ? TextDecoration.lineThrough : null,
+                  ),
+                ),
+                value: todo.checked,
+                activeColor: const Color(0xFF7E57C2),
+                onChanged: (bool? value) {
+                  setState(
+                    () => todo.checked = value!,
+                  );
+                }),
+          );
+        }).toList(),
+      ),
     );
   }
 }
